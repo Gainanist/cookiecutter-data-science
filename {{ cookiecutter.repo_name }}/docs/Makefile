@@ -6,6 +6,8 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
+ADDGRAPH      = add_graphs_to_docs.py
+GRAPHDIR      = ../reports/
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -42,6 +44,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
+	python $(ADDGRAPH) -s $(GRAPHDIR) -d .
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
