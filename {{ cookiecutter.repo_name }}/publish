@@ -1,0 +1,30 @@
+#! /bin/bash
+
+export "ORIGIN_PATH=$PWD"
+export "ROOT_DIR=$(git rev-parse --show-toplevel)"
+export "REPORTS_DIR=$ROOT_DIR/reports"
+
+export "NOTEBOOK_PATH=$(realpath --relative-to=$ROOT_DIR $PWD/$1)"
+export "NOTEBOOK_NAME_PATH=${NOTEBOOK_PATH%.*}"
+
+export "HTML_PATH=$REPORTS_DIR/$NOTEBOOK_NAME_PATH.html"
+export "HTML_DIR=$(dirname $HTML_PATH)"
+export "HTML_NAME=$(basename $HTML_PATH)"
+
+# mkdir -p $HTML_DIR
+
+if [ -f "$HTML_PATH.dvc" ]; then
+    dvc remove "$HTML_PATH.dvc"
+fi
+jupyter nbconvert $1 --to html --output "$HTML_PATH"
+
+cd "$HTML_DIR"
+dvc add "$HTML_NAME"
+git add "$HTML_NAME.dvc"
+if [ -f ".gitignore" ]; then
+    git add ".gitignore"
+fi
+
+cd "$ROOT_DIR/docs"
+make html
+cd "$ORIGIN_DIR"
