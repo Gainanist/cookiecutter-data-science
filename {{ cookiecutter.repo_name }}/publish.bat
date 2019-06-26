@@ -21,6 +21,10 @@ for /f "delims=" %%c in ("%HTML_PATH%") do (
   set "HTML_NAME=%%~nxc"
 )
 
+setlocal enableextensions
+md %HTML_DIR%
+endlocal
+
 IF EXIST "%HTML_PATH%.dvc" dvc remove "%HTML_PATH%.dvc"
 jupyter nbconvert %1 --to html --output "%HTML_PATH%"
 
