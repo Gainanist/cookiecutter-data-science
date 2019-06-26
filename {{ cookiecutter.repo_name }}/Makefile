@@ -35,7 +35,6 @@ lint:
 ## Set up python interpreter environment
 create_environment:
 	$(PYTHON_INTERPRETER) -m venv venv
-	mv publish venv/bin/publish
 
 ## Test python environment is setup correctly
 test_environment:
