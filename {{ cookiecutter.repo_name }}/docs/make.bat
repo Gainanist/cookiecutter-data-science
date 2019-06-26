@@ -8,6 +8,8 @@ if "%SPHINXBUILD%" == "" (
 set BUILDDIR=_build
 set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% .
 set I18NSPHINXOPTS=%SPHINXOPTS% .
+set ADDGRAPH=add_graphs_to_docs.py
+set GRAPHDIR=..\reports\
 if NOT "%PAPER%" == "" (
 	set ALLSPHINXOPTS=-D latex_paper_size=%PAPER% %ALLSPHINXOPTS%
 	set I18NSPHINXOPTS=-D latex_paper_size=%PAPER% %I18NSPHINXOPTS%
@@ -45,6 +47,7 @@ if "%1" == "clean" (
 )
 
 if "%1" == "html" (
+	python %ADDGRAPH% -s %GRAPHDIR% -d .
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html
 	if errorlevel 1 exit /b 1
 	echo.
