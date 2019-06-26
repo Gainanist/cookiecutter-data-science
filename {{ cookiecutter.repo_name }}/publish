@@ -11,7 +11,7 @@ export "HTML_PATH=$REPORTS_DIR/$NOTEBOOK_NAME_PATH.html"
 export "HTML_DIR=$(dirname $HTML_PATH)"
 export "HTML_NAME=$(basename $HTML_PATH)"
 
-# mkdir -p $HTML_DIR
+mkdir -p $HTML_DIR
 
 if [ -f "$HTML_PATH.dvc" ]; then
     dvc remove "$HTML_PATH.dvc"
