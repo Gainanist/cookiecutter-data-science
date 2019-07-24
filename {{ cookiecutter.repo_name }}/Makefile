@@ -35,7 +35,7 @@ lint:
 ## Set up python interpreter environment
 create_environment:
 	$(PYTHON_INTERPRETER) -m venv venv
-	move publish.bat venv\Scripts\publish.bat
+	copy publish.bat venv\Scripts\publish.bat
 
 ## Test python environment is setup correctly
 test_environment:
